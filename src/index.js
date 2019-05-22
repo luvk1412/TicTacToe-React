@@ -8,7 +8,7 @@ function Square(props) {
         backgroundColor:'#ccc',
     }
     return (
-        <button className="square" onClick={() => props.onClick() } style={props.winSqaure ? winstyle : null}>
+        <button className="btn btn-light square" onClick={() => props.onClick() } style={props.winSqaure ? winstyle : null}>
             {props.value}
         </button>
     );
@@ -104,7 +104,7 @@ class Game extends React.Component {
             const description = move ? ('Position : (' + (Math.floor(step.clicked/3)+1) + ',' + (step.clicked % 3 + 1) +'), Go to move # ' + move) : 'Go to game start';
             return (
                 <li key ={move}>
-                    <button style={move===this.state.stepNumber ? {fontWeight:'bold'} : {fontWeight : 'normal'}} onClick={() => this.jumpTo(move)}>{description}</button>
+                    <button className="btn btn-light" style={move===this.state.stepNumber ? {fontWeight:'bold'} : {fontWeight : 'normal'}} onClick={() => this.jumpTo(move)}>{description}</button>
                 </li>
             ) 
         });
@@ -116,7 +116,7 @@ class Game extends React.Component {
                 status = 'Match is Draw';
             }
             else{
-                status = 'Winner : ' + winner;
+                status = 'Winner : ' + winner.winner;
                 winningSquares = winner.winningSquares;
             }
         }
@@ -124,17 +124,17 @@ class Game extends React.Component {
             status = 'Next Player : ' + (this.state.xIsNext ? 'X' : ' O');
         }
         return (
-            <div className="game">
-                <div className="game-board">
+            <div className="container">
+                <div className="container">
                     <Board
                         squares={current.squares}
                         onClick={(i) => this.handleClick(i)}
                         winningSquares = {winningSquares}/>
                 </div>
-                <div className="game-info">
-                    <div>{status}</div>
-                    <div>
-                        <button onClick={()=>this.handleSort()}>Reverse Moves list</button>
+                <div className="container">
+                    <div className="container">{status}</div>
+                    <div className="container">
+                        <button className="btn btn-secondary" onClick={()=>this.handleSort()}>Reverse Moves list</button>
                     </div>
                     <ol>{this.state.isAscending ?  moves : moves.reverse()}</ol>
                 </div>
